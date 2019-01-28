@@ -2,7 +2,12 @@
 #'
 #' Loglikelihood adjustment for fitting Generalised Extreme Value (gev) model and
 #' Threshold Modelling using generalised Pareto distribution (gpd). The adjustment is
-#' based on package \code{evd}.
+#' based on package \code{evd}.the adjustment is made on objects that is coming from the
+#' evd package.
+#'
+#' @details get people to where to find out more about the details.
+#'
+#' @references citation("sandwich")
 #'
 #' @inherit adj_object params details return references seealso
 #'
