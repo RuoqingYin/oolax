@@ -2,12 +2,24 @@
 % Please edit documentation in R/ismev_gpd_fit.R
 \name{logLikVec.ismev_gpd}
 \alias{logLikVec.ismev_gpd}
-\title{Additional optional arguments. At present no optional arguments are used.
-let's check github}
+\title{Adjusted loglikelihood of the GPD}
 \usage{
 \method{logLikVec}{ismev_gpd}(object, pars = NULL, ...)
 }
+\arguments{
+\item{...}{Further arguments to be passed to the functions in the
+sandwich package \code{\link[sandwich]{meat}}, if \code{cluster = NULL},
+or \code{\link[sandwich:vcovCL]{meatCL}}, otherwise.}
+}
+\value{
+An object of class \code{c("oolax", "chandwich")} with the same structure as an
+        object returned from \code{\link[chandwich]{adjust_loglik}}.
+}
 \description{
-Additional optional arguments. At present no optional arguments are used.
-let's check github
+It provides a vector of the contributions to the independence loglikelihood from
+individual observations for Peaks Over Threshold modelling. Used by
+\code{logLikVec()}.
+}
+\details{
+Methods for class ismev_gpd
 }

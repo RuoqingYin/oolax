@@ -2,7 +2,7 @@
 % Please edit documentation in R/evd_fpot.R
 \name{logLikVec.pot}
 \alias{logLikVec.pot}
-\title{logLikVec}
+\title{logLikVec - loglikelihood vector for GPD}
 \usage{
 \method{logLikVec}{pot}(object, pars = NULL, ...)
 }
@@ -20,7 +20,8 @@ An object of class \code{c("oolax", "chandwich")} with the same structure as an
 }
 \description{
 It provides a vector of the contributions to the independence loglikelihood from
-individual observations for Peaks Over Threshold modelling.
+individual observations for Peaks Over Threshold modelling. Used by
+\code{alogLik.evd()}
 }
 \examples{
 library(evd)

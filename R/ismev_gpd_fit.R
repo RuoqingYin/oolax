@@ -1,8 +1,16 @@
 # ============================== ismev::gpd.fit ============================= #
-
-# Methods for class ismev_gpd
-#'Additional optional arguments. At present no optional arguments are used.
-#'let's check github
+#' Adjusted loglikelihood of the GPD
+#'
+#' It provides a vector of the contributions to the independence loglikelihood from
+#' individual observations for Peaks Over Threshold modelling. Used by
+#' \code{logLikVec()}.
+#'
+#' Methods for class ismev_gpd
+#'
+#' @inherit adj_object params details return references seealso
+#'
+#' Additional optional arguments. At present no optional arguments are used.
+#'
 
 #' @export
 logLikVec.ismev_gpd <- function(object, pars = NULL, ...) {

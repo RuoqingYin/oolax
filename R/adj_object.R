@@ -54,6 +54,7 @@ adj_object <- function(x, cluster = NULL, use_sandwich = TRUE,
     has_vcov_method <- paste0("vcov.", class(x)) %in% all_methods
     if (any(has_vcov_method)) {
       H <- -solve(vcov(x))
+   # reverse the process, go back to find the Hessian (ismev:gev.fit)
     } else {
       H <- NULL
     }

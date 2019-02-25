@@ -1,8 +1,9 @@
 # ================================ evd::fgev ================================ #
-#' logLikVec - loglikelihood vector
+#' logLikVec - loglikelihood vector for GEV Distribution
 #'
 #' It provides a vector of the contributions to the independence loglikelihood from
-#' individual observations for Generalized Extreme Value distribution.
+#' individual observations for Generalized Extreme Value distribution. Used by
+#' \code{alogLik.evd()}.
 #'
 #' @param object Object of class "gev".
 #'

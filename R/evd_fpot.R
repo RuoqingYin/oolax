@@ -1,8 +1,9 @@
-# ================================ evd::fgev ================================ #
-#' logLikVec
+# ================================ evd::fpot ================================ #
+#' logLikVec - loglikelihood vector for GPD
 #'
 #' It provides a vector of the contributions to the independence loglikelihood from
-#' individual observations for Peaks Over Threshold modelling.
+#' individual observations for Peaks Over Threshold modelling. Used by
+#' \code{alogLik.evd()}
 #'
 #'
 #' @param object Object of class "pot"

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ismev_gev_fit.R
 \name{logLikVec.ismev_gev}
 \alias{logLikVec.ismev_gev}
-\title{Adjusted loglikelihood of the GEV distribution based on \code{ismev::gev.fit}.}
+\title{Adjusted loglikelihood of the GEV distribution}
 \usage{
 \method{logLikVec}{ismev_gev}(object, pars = NULL, ...)
 }
@@ -16,5 +16,10 @@ An object of class \code{c("oolax", "chandwich")} with the same structure as an
         object returned from \code{\link[chandwich]{adjust_loglik}}.
 }
 \description{
-Adjusted loglikelihood of the GEV distribution based on \code{ismev::gev.fit}.
+It provides a vector of the contributions to the independence loglikelihood from
+individual observations for Generalized Extreme Value distribution. Used by
+\code{logLikVec()}.
+}
+\details{
+Methods for class ismev_gev
 }

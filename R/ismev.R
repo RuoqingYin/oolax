@@ -1,7 +1,7 @@
 #' Loglikelihood adjustment of ismev fits
 #'
-#' Loglikelihood adjustment for fitting Generalised Extreme Value (gev) model and
-#' Threshold Modelling using generalised Pareto distribution (gpd). The adjustment is
+#' Loglikelihood adjustment for fitting Generalised Extreme Value (GEV) model and
+#' Threshold Modelling using generalised Pareto distribution (GPD). The adjustment is
 #' based on package \code{ismev}.
 #'
 #' @inherit adj_object params details return references seealso

@@ -1,7 +1,13 @@
 # ============================== ismev::gev.fit ============================= #
-# Methods for class ismev_gev
+#' Adjusted loglikelihood of the GEV distribution
 #'
-#' Adjusted loglikelihood of the GEV distribution based on \code{ismev::gev.fit}.
+#' It provides a vector of the contributions to the independence loglikelihood from
+#' individual observations for Generalized Extreme Value distribution. Used by
+#' \code{logLikVec()}.
+#'
+#' Methods for class ismev_gev
+#'
+#'
 #'
 #' @inherit adj_object params details return references seealso
 #'

@@ -29,8 +29,8 @@ An object of class \code{c("oolax", "chandwich")} with the same structure as an
         object returned from \code{\link[chandwich]{adjust_loglik}}.
 }
 \description{
-Loglikelihood adjustment for fitting Generalised Extreme Value (gev) model and
-Threshold Modelling using generalised Pareto distribution (gpd). The adjustment is
+Loglikelihood adjustment for fitting Generalised Extreme Value (GEV) model and
+Threshold Modelling using generalised Pareto distribution (GPD). The adjustment is
 based on package \code{ismev}.
 }
 \examples{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/evd_fgev.R
 \name{logLikVec.gev}
 \alias{logLikVec.gev}
-\title{logLikVec - loglikelihood vector}
+\title{logLikVec - loglikelihood vector for GEV Distribution}
 \usage{
 \method{logLikVec}{gev}(object, pars = NULL, ...)
 }
@@ -20,7 +20,8 @@ An object of class \code{c("oolax", "chandwich")} with the same structure as an
 }
 \description{
 It provides a vector of the contributions to the independence loglikelihood from
-individual observations for Generalized Extreme Value distribution.
+individual observations for Generalized Extreme Value distribution. Used by
+\code{alogLik.evd()}.
 }
 \examples{
 library(evd)
