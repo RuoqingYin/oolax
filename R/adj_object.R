@@ -1,6 +1,7 @@
 #' Loglikelihood adjustment of fitted model objects
 #'
 #' Loglikelihood adjustment of fitted model objects
+#' change here
 #'
 #' @param x A fitted model object.
 #'

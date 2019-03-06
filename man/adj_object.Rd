@@ -32,4 +32,5 @@ An object of class \code{c("oolax", "chandwich")} with the same structure as an
 }
 \description{
 Loglikelihood adjustment of fitted model objects
+change here
 }
