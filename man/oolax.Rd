@@ -11,7 +11,11 @@ objects produced by several R packages for extreme value modelling.
 The packages are \code{evd}, \code{ismev}, ...
 }
 \details{
-Add details.
+The main function in the oolax package is \code{\link{alogLik}}, which provides
+loglikelihood adjustment for fitting Generalised Extreme Value (GEV) model and
+Threshold Modelling using generalised Pareto distribution (GPD). The adjustment is
+based on package \code{\link{evd}}.the adjustment is made on objects that is coming from the
+evd package.
 }
 \references{
 Chandler, R. E. and Bate, S. (2007). Inference for clustered
