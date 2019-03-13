@@ -1,5 +1,5 @@
 Package: oolax
-Title: Objected-orientated Loglikelihood Adjustment for Extreme Value Models
+Title: Object-orientated Loglikelihood Adjustment for Extreme Value Models
 Version: 1.0.0.9000
 Date: 2018-10-24
 Authors@R: c(
@@ -7,9 +7,12 @@ Authors@R: c(
       role = c("aut", "cre", "cph")),
     person("Camellia", "Yin", role = c("aut", "cph"))
     )
-Description: Performs adjustments of the independence loglikelihood for 
-    fitted model objects produced by several R packages for extreme value 
-    modelling.  The packages are \code{evd}, \code{ismev}, ...
+Description: Provides functions for loglikelihood adjustment for fitting extreme value 
+model. The fitted object is from the package ‘evd’ and ‘ismev’ for extreme value analysis.
+The ‘chandwich’ package <https://cran.r-project.org/web/packages/chandwich/index.html> is 
+used to construct the adjustment given the clustered data. The ‘sandwich’ package 
+< https://cran.r-project.org/web/packages/sandwich/index.html> is used to adjust the 
+robust covariance matrix estimators.
 Imports: chandwich,
     graphics,
     methods,

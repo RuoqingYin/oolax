@@ -1,6 +1,6 @@
 #' Loglikelihood adjustment of fitted model objects
 #'
-#' Loglikelihood adjustment of fitted model objects
+#' Loglikelihood adjustment of fitted objects
 #'
 #' @param x A fitted model object.
 #'
@@ -23,6 +23,9 @@
 #'
 #' @return An object of class \code{c("oolax", "chandwich")} with the same structure as an
 #'         object returned from \code{\link[chandwich]{adjust_loglik}}.
+#'
+#' @details Performs loglikelihood adjustment of fitted objects for clustered data, based
+#' on Chandler and Bata (2007). We use vertical adjustment which is described in Section 6.
 #'
 #'
 #'
