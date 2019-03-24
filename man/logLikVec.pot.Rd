@@ -23,6 +23,10 @@ It provides a vector of the contributions to the independence loglikelihood from
 individual observations for Peaks Over Threshold modelling. Used by
 \code{alogLik.evd()}
 }
+\details{
+Performs loglikelihood adjustment of fitted objects for clustered data, based
+on Chandler and Bata (2007). We use vertical adjustment which is described in Section 6.
+}
 \examples{
 library(evd)
 uvdata <- rgpd(100, loc = 0, scale = 1.1, shape = 0.2)

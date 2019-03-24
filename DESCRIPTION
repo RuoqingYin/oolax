@@ -8,11 +8,12 @@ Authors@R: c(
     person("Camellia", "Yin", role = c("aut", "cph"))
     )
 Description: Provides functions for loglikelihood adjustment for fitting extreme value 
-model. The fitted object is from the package ‘evd’ and ‘ismev’ for extreme value analysis.
-The ‘chandwich’ package <https://cran.r-project.org/web/packages/chandwich/index.html> is 
-used to construct the adjustment given the clustered data. The ‘sandwich’ package 
-< https://cran.r-project.org/web/packages/sandwich/index.html> is used to adjust the 
-robust covariance matrix estimators.
+    models. The fitted object is from the package 'evd' and 'ismev' for extreme value 
+    analysis. The 'chandwich' package 
+    <https://cran.r-project.org/web/packages/chandwich/index.html> is used to construct 
+    the adjustment given the clustered data. The 'sandwich' package 
+    <https://cran.r-project.org/web/packages/sandwich/index.html> is used to adjust the 
+    robust covariance matrix estimators.
 Imports: chandwich,
     graphics,
     methods,
