@@ -23,3 +23,19 @@ individual observations for Generalized Extreme Value distribution. Used by
 \details{
 Methods for class ismev_gev
 }
+\seealso{
+\code{\link[chandwich]{adjust_loglik}} Loglikelihood adjustment using the sandwich
+estimator.
+
+\code{\link[oolax]{logLikVec.gev}} Loglikelihood vector for GEV Distribution fitted
+by \code{\link[evd]{fgev}}
+
+\code{\link[oolax]{logLikVec.pot}} Loglikelihood vector for GPD Distribution fitted
+by \code{\link[evd]{fpot}}
+
+\code{\link[oolax]{logLikVec.ismev_gev}} Loglikelihood vector for GEV Distribution
+fitted by \code{\link[ismev]{gev.fit}}
+
+\code{\link[oolax]{logLikVec.ismev_gpd}} Loglikelihood vector for GPD Distribution
+fitted by \code{\link[ismev]{gpd.fit}}
+}

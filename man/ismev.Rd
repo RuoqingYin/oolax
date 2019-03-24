@@ -35,7 +35,14 @@ based on package \code{ismev}.
 }
 \details{
 Performs loglikelihood adjustment of fitted objects for clustered data, based
-on Chandler and Bata (2007). We use vertical adjustment which is described in Section 6.
+on Chandler and Bata (2007). We use vertical adjustment which is described in Section 6
+in Chandler and Bata (2007). The fitted object x must have S3 methods:
+\code{logLikVec}, \code{coef}, and \code{nobs}.  It mayhave method \code{vcov} and
+\code{estfun}. If a \code{vcov} method is not available then the variance-covariance
+matrix of the model parameters is estimated inside
+\code{\link[chandwich]{adjust_loglik}}. If an \code{estfun} method is not available
+then the score matrix is estimated using \code{\link[numDeriv]{jacobian}}. More
+details can be found on \code{\link[oolax]{logLikVec.gev}}.
 }
 \examples{
 # We need the ismev package
@@ -58,4 +65,20 @@ if (got_ismev) {
  adj_fit <- alogLik(fit)
  summary(adj_fit)
 }
+}
+\seealso{
+\code{\link[chandwich]{adjust_loglik}} Loglikelihood adjustment using the sandwich
+estimator.
+
+\code{\link[oolax]{logLikVec.gev}} Loglikelihood vector for GEV Distribution fitted
+by \code{\link[evd]{fgev}}
+
+\code{\link[oolax]{logLikVec.pot}} Loglikelihood vector for GPD Distribution fitted
+by \code{\link[evd]{fpot}}
+
+\code{\link[oolax]{logLikVec.ismev_gev}} Loglikelihood vector for GEV Distribution
+fitted by \code{\link[ismev]{gev.fit}}
+
+\code{\link[oolax]{logLikVec.ismev_gpd}} Loglikelihood vector for GPD Distribution
+fitted by \code{\link[ismev]{gpd.fit}}
 }
