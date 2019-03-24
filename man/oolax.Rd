@@ -6,17 +6,23 @@
 \alias{oolax-package}
 \title{oolax: Objected-orientated Loglikelihood Adjustment for Extreme Value Models}
 \description{
-Performs adjustments of the independence loglikelihood for fitted model
-objects produced by several R packages for extreme value modelling.
-The packages are \code{evd}, \code{ismev}, ...
+Provides functions for loglikelihood adjustment for fitting extreme value
+models. The fitted object is from the package 'evd' and 'ismev' for extreme value
+analysis. The 'chandwich' package
+<https://cran.r-project.org/web/packages/chandwich/index.html> is used to construct
+the adjustment given the clustered data. The 'sandwich' package
+<https://cran.r-project.org/web/packages/sandwich/index.html> is used to adjust the
+robust covariance matrix estimators.
 }
 \details{
 The main function in the oolax package is \code{\link{alogLik}}, which provides
 loglikelihood adjustment for fitting Generalised Extreme Value (GEV) model and
 Threshold Modelling using generalised Pareto distribution (GPD). The adjustment is
-based on package \code{\link{evd}} and \code{\link{ismev}}. The user can make
-adjustment towards fitted obejcts from \code{\link{evd}} and \code{\link{evd}}. The
-metholdology is develped based on  \code{\link{sandwich}} and  \code{\link{chandwich}}.
+based on package \code{\link[evd]{evd}} and \code{\link[ismev]{ismev}}. The user can
+make adjustment towards fitted obejcts such as \link[evd]{fgev} and \link[evd]{fgev}
+from the package \code{\link[evd]{evd}}, and \link[ismev]{gev.fit} and
+\link[ismev]{gpd.fit} from the package \code{\link[ismev]{ismev}}. The metholdology is
+develped based on \code{\link{sandwich}} and \code{\link{chandwich}}.
 
 See \code{vignette("oolax-vignette", package = "oolax")} for an overview and detailed
 examples about the package.
