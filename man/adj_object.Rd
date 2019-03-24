@@ -2,7 +2,7 @@
 % Please edit documentation in R/adj_object.R
 \name{adj_object}
 \alias{adj_object}
-\title{Loglikelihood adjustment of fitted model objects}
+\title{Loglikelihood adjustment of fitted objects}
 \usage{
 adj_object(x, cluster = NULL, use_sandwich = TRUE, use_vcov = TRUE,
   ...)
@@ -31,12 +31,12 @@ An object of class \code{c("oolax", "chandwich")} with the same structure as an
         object returned from \code{\link[chandwich]{adjust_loglik}}.
 }
 \description{
-Loglikelihood adjustment of fitted objects
-}
-\details{
 Performs loglikelihood adjustment of fitted objects for clustered data, based
 on Chandler and Bata (2007). We use vertical adjustment which is described in Section 6
-in Chandler and Bata (2007). The fitted object x must have S3 methods:
+in Chandler and Bata (2007).
+}
+\details{
+The fitted object x must have S3 methods:
 \code{logLikVec}, \code{coef}, and \code{nobs}.  It mayhave method \code{vcov} and
 \code{estfun}. If a \code{vcov} method is not available then the variance-covariance
 matrix of the model parameters is estimated inside

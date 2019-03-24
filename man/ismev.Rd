@@ -34,9 +34,7 @@ Threshold Modelling using generalised Pareto distribution (GPD). The adjustment 
 based on package \code{ismev}.
 }
 \details{
-Performs loglikelihood adjustment of fitted objects for clustered data, based
-on Chandler and Bata (2007). We use vertical adjustment which is described in Section 6
-in Chandler and Bata (2007). The fitted object x must have S3 methods:
+The fitted object x must have S3 methods:
 \code{logLikVec}, \code{coef}, and \code{nobs}.  It mayhave method \code{vcov} and
 \code{estfun}. If a \code{vcov} method is not available then the variance-covariance
 matrix of the model parameters is estimated inside
