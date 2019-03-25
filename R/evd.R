@@ -2,12 +2,12 @@
 #'
 #' Loglikelihood adjustment for fitting Generalised Extreme Value (gev) model and
 #' Threshold Modelling using generalised Pareto distribution (gpd). The adjustment is
-#' based on package \code{evd}.the adjustment is made on objects that is coming from the
-#' evd package.
+#' based on package \code{evd}.
 #'
-#' @details get people to where to find out more about the details.
 #'
-#' @references citation("sandwich")
+#' @references Zeileis A (2006). “Object-Oriented Computation of Sandwich Estimators.”
+#' _Journal of Statistical Software_, *16*(9), 1-16. doi: 10.18637/jss.v016.i09
+#' (URL:http://doi.org/10.18637/jss.v016.i09).
 #'
 #' @inherit adj_object params details return references seealso
 #'

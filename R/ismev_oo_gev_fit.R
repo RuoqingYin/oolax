@@ -8,12 +8,13 @@
 #' for the location, scale and shape parameters of the model.
 #' For additional information, please check \code{\link[ismev]{gev.fit}}.
 #'
+#'
 #' @references Heffernan, J. E. and Stephenson, A. G. (2018). ismev: An
 #'   Introduction to Statistical Modeling of Extreme Values.
 #'   R package version 1.42.
 #'   \url{https://CRAN.R-project.org/package=ismev}.
+#'
 #' @examples
-#' # We need the evd package
 #' got_ismev <- requireNamespace("ismev", quietly = TRUE)
 #' if (got_ismev) {
 #'   fit1 <- gev.fit(revdbayes::portpirie, show = FALSE)

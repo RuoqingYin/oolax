@@ -32,7 +32,13 @@ based on package \code{evd}.the adjustment is made on objects that is coming fro
 evd package.
 }
 \details{
-get people to where to find out more about the details.
+The fitted object must have S3 methods:
+\code{logLikVec}, \code{coef}, and \code{nobs}.  It may have method \code{vcov} and
+\code{estfun}. If a \code{vcov} method is not available then the variance-covariance
+matrix of the model parameters is estimated inside
+\code{\link[chandwich]{adjust_loglik}}. If an \code{estfun} method is not available
+then the score matrix is estimated using \code{\link[numDeriv]{jacobian}}. More in
+See Also.
 }
 \examples{
 # We need the evd package
@@ -66,7 +72,9 @@ if (got_evd) {
 }
 }
 \references{
-citation("sandwich")
+Zeileis A (2006). “Object-Oriented Computation of Sandwich Estimators.”
+_Journal of Statistical Software_, *16*(9), 1-16. doi: 10.18637/jss.v016.i09
+(URL:http://doi.org/10.18637/jss.v016.i09).
 }
 \seealso{
 \code{\link[chandwich]{adjust_loglik}} Loglikelihood adjustment using the sandwich

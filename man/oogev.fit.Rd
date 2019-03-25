@@ -19,7 +19,6 @@ for the location, scale and shape parameters of the model.
 For additional information, please check \code{\link[ismev]{gev.fit}}.
 }
 \examples{
-# We need the evd package
 got_ismev <- requireNamespace("ismev", quietly = TRUE)
 if (got_ismev) {
   fit1 <- gev.fit(revdbayes::portpirie, show = FALSE)
