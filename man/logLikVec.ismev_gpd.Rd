@@ -2,14 +2,19 @@
 % Please edit documentation in R/ismev_gpd_fit.R
 \name{logLikVec.ismev_gpd}
 \alias{logLikVec.ismev_gpd}
-\title{Adjusted loglikelihood of the GPD}
+\title{logLikVec - Adjusted loglikelihood vector for GPD Distribution fitted by
+ismev::gpd.fit}
 \usage{
 \method{logLikVec}{ismev_gpd}(object, pars = NULL, ...)
 }
 \arguments{
-\item{...}{Further arguments to be passed to the functions in the
-sandwich package \code{\link[sandwich]{meat}}, if \code{cluster = NULL},
-or \code{\link[sandwich:vcovCL]{meatCL}}, otherwise.}
+\item{object}{Object of class "ismev_gpd"。It must come from
+\code{\link[ismev]{gpd.fit}}.}
+
+\item{pars}{parameters for the fitted object. Since the object is of class "ismev_gpd",
+it is not necessary to input the parameters.}
+
+\item{...}{Additional optional arguments. At present no optional arguments are used.}
 }
 \value{
 An object of class \code{c("oolax", "chandwich")} with the same structure as an
@@ -21,7 +26,13 @@ individual observations for Peaks Over Threshold modelling. Used by
 \code{logLikVec()}.
 }
 \details{
-Methods for class ismev_gpd
+The fitted object must have S3 methods:
+\code{logLikVec}, \code{coef}, and \code{nobs}.  It may have method \code{vcov} and
+\code{estfun}. If a \code{vcov} method is not available then the variance-covariance
+matrix of the model parameters is estimated inside
+\code{\link[chandwich]{adjust_loglik}}. If an \code{estfun} method is not available
+then the score matrix is estimated using \code{\link[numDeriv]{jacobian}}. More in
+See Also.
 }
 \seealso{
 \code{\link[chandwich]{adjust_loglik}} Loglikelihood adjustment using the sandwich

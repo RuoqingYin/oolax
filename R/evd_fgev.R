@@ -1,5 +1,5 @@
 # ================================ evd::fgev ================================ #
-#' logLikVec - loglikelihood vector for GEV Distribution
+#' logLikVec - Adjusted loglikelihood vector for GEV Distribution fitted by evd::fgev
 #'
 #' It provides a vector of the contributions to the independence loglikelihood from
 #' individual observations for Generalized Extreme Value distribution. Used by

@@ -31,8 +31,8 @@
 #' \code{estfun}. If a \code{vcov} method is not available then the variance-covariance
 #' matrix of the model parameters is estimated inside
 #' \code{\link[chandwich]{adjust_loglik}}. If an \code{estfun} method is not available
-#' then the score matrix is estimated using \code{\link[numDeriv]{jacobian}}. More
-#' details can be found on \code{\link[oolax]{logLikVec.gev}}.
+#' then the score matrix is estimated using \code{\link[numDeriv]{jacobian}}. More in
+#' See Also.
 #'
 #' @seealso
 #' \code{\link[chandwich]{adjust_loglik}} Loglikelihood adjustment using the sandwich

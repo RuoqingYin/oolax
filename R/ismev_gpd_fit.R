@@ -1,17 +1,22 @@
 # ============================== ismev::gpd.fit ============================= #
-#' Adjusted loglikelihood of the GPD
+#' logLikVec - Adjusted loglikelihood vector for GPD Distribution fitted by
+#' ismev::gpd.fit
 #'
 #' It provides a vector of the contributions to the independence loglikelihood from
 #' individual observations for Peaks Over Threshold modelling. Used by
 #' \code{logLikVec()}.
 #'
-#' Methods for class ismev_gpd
+#' @param object Object of class "ismev_gpd"。It must come from
+#' \code{\link[ismev]{gpd.fit}}.
+#'
+#' @param pars parameters for the fitted object. Since the object is of class "ismev_gpd",
+#' it is not necessary to input the parameters.
+#'
+#' @param ... Additional optional arguments. At present no optional arguments are used.
+#'
 #'
 #' @inherit adj_object params details return references seealso
 #'
-#' Additional optional arguments. At present no optional arguments are used.
-#'
-
 #' @export
 logLikVec.ismev_gpd <- function(object, pars = NULL, ...) {
   if (!missing(...)) {

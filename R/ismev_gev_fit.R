@@ -1,18 +1,21 @@
 # ============================== ismev::gev.fit ============================= #
-#' Adjusted loglikelihood of the GEV distribution
+#' logLikVec - Adjusted loglikelihood vector for GEV Distribution fitted by
+#' ismev::gev.fit
 #'
 #' It provides a vector of the contributions to the independence loglikelihood from
 #' individual observations for Generalized Extreme Value distribution. Used by
 #' \code{logLikVec()}.
 #'
-#' Methods for class ismev_gev
+#' @param object Object of class "ismev_gev"。It must come from
+#' \code{\link[ismev]{gev.fit}}.
 #'
+#' @param pars parameters for the fitted object. Since the object is of class "ismev_gev",
+#' it is not necessary to input the parameters.
 #'
+#' @param ... Additional optional arguments. At present no optional arguments are used.
 #'
 #' @inherit adj_object params details return references seealso
 #'
-#' Additional optional arguments. At present no optional arguments are used.
-
 #' @export
 logLikVec.ismev_gev <- function(object, pars = NULL, ...) {
   if (!missing(...)) {

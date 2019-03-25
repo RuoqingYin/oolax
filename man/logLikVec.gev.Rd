@@ -2,7 +2,7 @@
 % Please edit documentation in R/evd_fgev.R
 \name{logLikVec.gev}
 \alias{logLikVec.gev}
-\title{logLikVec - loglikelihood vector for GEV Distribution}
+\title{logLikVec - Adjusted loglikelihood vector for GEV Distribution fitted by evd::fgev}
 \usage{
 \method{logLikVec}{gev}(object, pars = NULL, ...)
 }
@@ -30,8 +30,8 @@ The fitted object must have S3 methods:
 \code{estfun}. If a \code{vcov} method is not available then the variance-covariance
 matrix of the model parameters is estimated inside
 \code{\link[chandwich]{adjust_loglik}}. If an \code{estfun} method is not available
-then the score matrix is estimated using \code{\link[numDeriv]{jacobian}}. More
-details can be found on \code{\link[oolax]{logLikVec.gev}}.
+then the score matrix is estimated using \code{\link[numDeriv]{jacobian}}. More in
+See Also.
 }
 \examples{
 library(evd)

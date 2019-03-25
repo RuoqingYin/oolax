@@ -1,5 +1,5 @@
 # ================================ evd::fpot ================================ #
-#' logLikVec - loglikelihood vector for GPD
+#' logLikVec - Adjusted loglikelihood vector for GPD Distribution fitted by evd::fpot
 #'
 #' It provides a vector of the contributions to the independence loglikelihood from
 #' individual observations for Peaks Over Threshold modelling. Used by
