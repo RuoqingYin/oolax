@@ -7,12 +7,13 @@
 \method{logLikVec}{gev}(object, pars = NULL, ...)
 }
 \arguments{
-\item{object}{Object of class "gev".}
+\item{object}{Object of class "gev". It must come from \code{\link[evd]{fgev}}.
+Also see Details.}
+
+\item{pars}{parameters for the fitted object. Since the object is of class "gev", it is
+not necessary to input the parameters.}
 
 \item{...}{Additional optional arguments. At present no optional arguments are used.}
-
-\item{contrib}{If \code{contrib = TRUE} then return all conributions
-to the log-likelihood  Otherwise return the total log-likelihood.}
 }
 \value{
 An object of class \code{c("oolax", "chandwich")} with the same structure as an
@@ -24,8 +25,8 @@ individual observations for Generalized Extreme Value distribution. Used by
 \code{alogLik.evd()}.
 }
 \details{
-The fitted object x must have S3 methods:
-\code{logLikVec}, \code{coef}, and \code{nobs}.  It mayhave method \code{vcov} and
+The fitted object must have S3 methods:
+\code{logLikVec}, \code{coef}, and \code{nobs}.  It may have method \code{vcov} and
 \code{estfun}. If a \code{vcov} method is not available then the variance-covariance
 matrix of the model parameters is estimated inside
 \code{\link[chandwich]{adjust_loglik}}. If an \code{estfun} method is not available
@@ -37,7 +38,7 @@ library(evd)
 uvdata <- rgev(100, loc = 0.13, scale = 1.1, shape = 0.2)
 M1 <- fgev(uvdata, nsloc = (-49:50)/100)
 logLik(M1)
-logLikVec(M1, contrib = FALSE)
+logLikVec(M1)
 }
 \seealso{
 \code{\link[chandwich]{adjust_loglik}} Loglikelihood adjustment using the sandwich

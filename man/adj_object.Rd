@@ -36,8 +36,8 @@ on Chandler and Bata (2007). We use vertical adjustment which is described in Se
 in Chandler and Bata (2007).
 }
 \details{
-The fitted object x must have S3 methods:
-\code{logLikVec}, \code{coef}, and \code{nobs}.  It mayhave method \code{vcov} and
+The fitted object must have S3 methods:
+\code{logLikVec}, \code{coef}, and \code{nobs}.  It may have method \code{vcov} and
 \code{estfun}. If a \code{vcov} method is not available then the variance-covariance
 matrix of the model parameters is estimated inside
 \code{\link[chandwich]{adjust_loglik}}. If an \code{estfun} method is not available

@@ -5,10 +5,11 @@
 #' individual observations for Generalized Extreme Value distribution. Used by
 #' \code{alogLik.evd()}.
 #'
-#' @param object Object of class "gev".
+#' @param object Object of class "gev". It must come from \code{\link[evd]{fgev}}.
+#' Also see Details.
 #'
-#' @param contrib If \code{contrib = TRUE} then return all conributions
-#'   to the log-likelihood  Otherwise return the total log-likelihood.
+#' @param pars parameters for the fitted object. Since the object is of class "gev", it is
+#' not necessary to input the parameters.
 #'
 #' @param ... Additional optional arguments. At present no optional arguments are used.
 #'
@@ -19,7 +20,7 @@
 #' uvdata <- rgev(100, loc = 0.13, scale = 1.1, shape = 0.2)
 #' M1 <- fgev(uvdata, nsloc = (-49:50)/100)
 #' logLik(M1)
-#' logLikVec(M1, contrib = FALSE)
+#' logLikVec(M1)
 #' @export
 #'
 logLikVec.gev <- function(object, pars = NULL, ...) {

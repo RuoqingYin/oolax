@@ -34,8 +34,8 @@ Threshold Modelling using generalised Pareto distribution (GPD). The adjustment 
 based on package \code{ismev}.
 }
 \details{
-The fitted object x must have S3 methods:
-\code{logLikVec}, \code{coef}, and \code{nobs}.  It mayhave method \code{vcov} and
+The fitted object must have S3 methods:
+\code{logLikVec}, \code{coef}, and \code{nobs}.  It may have method \code{vcov} and
 \code{estfun}. If a \code{vcov} method is not available then the variance-covariance
 matrix of the model parameters is estimated inside
 \code{\link[chandwich]{adjust_loglik}}. If an \code{estfun} method is not available
