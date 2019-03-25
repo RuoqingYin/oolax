@@ -28,8 +28,7 @@ An object of class \code{c("oolax", "chandwich")} with the same structure as an
 \description{
 Loglikelihood adjustment for fitting Generalised Extreme Value (gev) model and
 Threshold Modelling using generalised Pareto distribution (gpd). The adjustment is
-based on package \code{evd}.the adjustment is made on objects that is coming from the
-evd package.
+based on package \code{evd}.
 }
 \details{
 The fitted object must have S3 methods:

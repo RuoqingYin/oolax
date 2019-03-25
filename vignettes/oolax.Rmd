@@ -4,9 +4,11 @@ author: "Paul Northrop, Camellia Yin"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introducing Objected-orientated Loglikelihood Adjustment for Extreme Value Models}
+  %\VignetteIndexEntry{Introducing Object-orientated Loglikelihood Adjustment for Extreme Value Models}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: oolax.bib
+link-citations: yes
 
 ---
 
@@ -17,51 +19,31 @@ knitr::opts_chunk$set(
 )
 ```
 
-The *oolax* package performs adjustments of a loglikelihood using sandwich estimator of the parameter covariate matrix, based on the methodology in @CB2007. This adjustment is built from (or, say, limited to) Generalised Extreme Value model (GEV) and generalised Pareto distribution (GPD) from packages *ismev* and *evd*.
+The *oolax* package performs loglikelihood adjustments of extreme value models with clustered data. It uses sandwich estimator of the parameter covariate matrix, based on the methodology in @CB2007. This adjustment is built from (or, say, limited to) Generalised Extreme Value model (GEV) and generalised Pareto distribution (GPD) from packages *ismev* and *evd*.
  
 
+## Loglikelihood adjustment using the alogLik function
 
-## Vignette Info
+The function `alogLik` returns an object of class `oolax`, `chandwich`: a function that can be used to adjust the standard error of the estimated parameters in extreme value models given clustered data. This function is designed for fitted object from `evd` and `ismev` package. The default is `cluster=NULL` which is explained in `chandwich::adjust_loglik`.
+We illustrate the loglikelihood adjustments and the use of the function in *oolax* using some examples, starting from a gev fitted for clustered data.
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
 
-## Styles
+## Extreme value modelling of maximum temperatures
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+We consider the example shown in Section 5.2 of @CB2007. The `owtemps` data (which can be found in *chandwich* package) contains annual maximum temperatures in Oxford and Worthing in the U.K. from 1901 to 1980. Year is considered as cluster, therefore there are 80 clusters of independent observations from a bivariate distribution. The loglikelihood adjustment is based on generalized extreme value (GEV) models which fitted by `oogev.fit`. The model is parameterized so that the marginal distribution at Oxford is GEV($\mu_0 + \mu_1, \sigma_0 + \sigma_1, \xi_0 + \xi_1$) and at Worthing is GEV($\mu_0 - \mu_1, \sigma_0 - \sigma_1, \xi_0 - \xi_1$), where GEV($\mu, \sigma, \xi$) denotes a GEV distribution with location $\mu$, scale $\sigma$ and shape $\xi$.
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+We perform loglikelihood adjustment for the full six-parameter model and reproduce the relevant rows of Table 2 in @CB2007.
 
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r}
+y <- c(chandwich::owtemps[, "Oxford"], chandwich::owtemps[, "Worthing"])
+x <- as.matrix(rep(c(1, -1), each = length(y) / 2))
+# Fit the model by oogev.fit which allows non-stationary parameters
+owfit <- oogev.fit(y, x, mul = 1, sigl = 1, shl = 1, method = "BFGS" )
+year <- rep(1:(length(y) / 2), 2)
+# Perform the loglikelihood adjustment of the full model
+adj_owfit <- alogLik(owfit, cluster = year, cadjust = FALSE)
+# Provides MLE, standard error of MLE, and adjusted standard error of MLE.
+summary(adj_owfit)
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
-
-
-# https://www.earthdatascience.org/courses/earth-analytics/document-your-science/add-citations-to-rmarkdown-report/ (*bookdown*?)

@@ -64,6 +64,11 @@ if (got_ismev) {
  summary(adj_fit)
 }
 }
+\references{
+Zeileis A (2006). “Object-Oriented Computation of Sandwich Estimators.”
+_Journal of Statistical Software_, *16*(9), 1-16. doi: 10.18637/jss.v016.i09
+(URL:http://doi.org/10.18637/jss.v016.i09).
+}
 \seealso{
 \code{\link[chandwich]{adjust_loglik}} Loglikelihood adjustment using the sandwich
 estimator.
