@@ -7,12 +7,12 @@
 \method{logLikVec}{pot}(object, pars = NULL, ...)
 }
 \arguments{
-\item{object}{Object of class "pot"}
+\item{object}{Object of class "pot"。It must come from \code{\link[evd]{fpot}}.}
+
+\item{pars}{parameters for the fitted object. Since the object is of class "pot", it is
+not necessary to input the parameters.}
 
 \item{...}{Additional optional arguments. At present no optional arguments are used.}
-
-\item{contrib}{If \code{contrib = TRUE} then return all conributions
-to the log-likelihood  Otherwise return the total log-likelihood}
 }
 \value{
 An object of class \code{c("oolax", "chandwich")} with the same structure as an
@@ -37,7 +37,7 @@ library(evd)
 uvdata <- rgpd(100, loc = 0, scale = 1.1, shape = 0.2)
 M1 <- fpot(uvdata, 1)
 logLik(M1)
-logLikVec(M1, contrib = FALSE)
+logLikVec(M1)
 }
 \seealso{
 \code{\link[chandwich]{adjust_loglik}} Loglikelihood adjustment using the sandwich

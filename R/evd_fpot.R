@@ -6,12 +6,14 @@
 #' \code{alogLik.evd()}
 #'
 #'
-#' @param object Object of class "pot"
+#' @param object Object of class "pot"。It must come from \code{\link[evd]{fpot}}.
 #'
-#' @param contrib If \code{contrib = TRUE} then return all conributions
-#'   to the log-likelihood  Otherwise return the total log-likelihood
+#' @param pars parameters for the fitted object. Since the object is of class "pot", it is
+#' not necessary to input the parameters.
 #'
 #' @param ... Additional optional arguments. At present no optional arguments are used.
+#'
+#'
 #'
 #' @inherit adj_object params details return references seealso
 #'
@@ -20,7 +22,7 @@
 #' uvdata <- rgpd(100, loc = 0, scale = 1.1, shape = 0.2)
 #' M1 <- fpot(uvdata, 1)
 #' logLik(M1)
-#' logLikVec(M1, contrib = FALSE)
+#' logLikVec(M1)
 #' @export
 #'
 logLikVec.pot <- function(object, pars = NULL, ...) {
