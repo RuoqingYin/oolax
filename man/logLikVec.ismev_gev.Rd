@@ -8,7 +8,7 @@ ismev::gev.fit}
 \method{logLikVec}{ismev_gev}(object, pars = NULL, ...)
 }
 \arguments{
-\item{object}{Object of class "ismev_gev"。It must come from
+\item{object}{Object of class "ismev_gev". It must come from
 \code{\link[ismev]{gev.fit}}.}
 
 \item{pars}{parameters for the fitted object. Since the object is of class "ismev_gev",

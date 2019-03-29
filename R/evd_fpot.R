@@ -6,7 +6,7 @@
 #' \code{alogLik.evd()}
 #'
 #'
-#' @param object Object of class "pot"。It must come from \code{\link[evd]{fpot}}.
+#' @param object Object of class "pot". It must come from \code{\link[evd]{fpot}}.
 #'
 #' @param pars parameters for the fitted object. Since the object is of class "pot", it is
 #' not necessary to input the parameters.

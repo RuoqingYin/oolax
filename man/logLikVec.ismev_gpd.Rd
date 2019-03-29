@@ -8,7 +8,7 @@ ismev::gpd.fit}
 \method{logLikVec}{ismev_gpd}(object, pars = NULL, ...)
 }
 \arguments{
-\item{object}{Object of class "ismev_gpd"。It must come from
+\item{object}{Object of class "ismev_gpd". It must come from
 \code{\link[ismev]{gpd.fit}}.}
 
 \item{pars}{parameters for the fitted object. Since the object is of class "ismev_gpd",

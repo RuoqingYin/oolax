@@ -6,7 +6,7 @@
 #' individual observations for Peaks Over Threshold modelling. Used by
 #' \code{logLikVec()}.
 #'
-#' @param object Object of class "ismev_gpd"。It must come from
+#' @param object Object of class "ismev_gpd". It must come from
 #' \code{\link[ismev]{gpd.fit}}.
 #'
 #' @param pars parameters for the fitted object. Since the object is of class "ismev_gpd",

@@ -7,7 +7,7 @@
 \method{logLikVec}{pot}(object, pars = NULL, ...)
 }
 \arguments{
-\item{object}{Object of class "pot"。It must come from \code{\link[evd]{fpot}}.}
+\item{object}{Object of class "pot". It must come from \code{\link[evd]{fpot}}.}
 
 \item{pars}{parameters for the fitted object. Since the object is of class "pot", it is
 not necessary to input the parameters.}

@@ -35,6 +35,7 @@ We consider the example shown in Section 5.2 of @CB2007. The `owtemps` data (whi
 We perform loglikelihood adjustment for the full six-parameter model and reproduce the relevant rows of Table 2 in @CB2007.
 
 ```{r}
+library(oolax)
 y <- c(chandwich::owtemps[, "Oxford"], chandwich::owtemps[, "Worthing"])
 x <- as.matrix(rep(c(1, -1), each = length(y) / 2))
 # Fit the model by oogev.fit which allows non-stationary parameters

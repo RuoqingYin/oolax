@@ -6,7 +6,7 @@
 #' individual observations for Generalized Extreme Value distribution. Used by
 #' \code{logLikVec()}.
 #'
-#' @param object Object of class "ismev_gev"。It must come from
+#' @param object Object of class "ismev_gev". It must come from
 #' \code{\link[ismev]{gev.fit}}.
 #'
 #' @param pars parameters for the fitted object. Since the object is of class "ismev_gev",
