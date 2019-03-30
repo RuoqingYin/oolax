@@ -30,7 +30,13 @@ We illustrate the loglikelihood adjustments and the use of the function in *oola
 
 ## Extreme value modelling of maximum temperatures
 
-We consider the example shown in Section 5.2 of @CB2007. The `owtemps` data (which can be found in *chandwich* package) contains annual maximum temperatures in Oxford and Worthing in the U.K. from 1901 to 1980. Year is considered as cluster, therefore there are 80 clusters of independent observations from a bivariate distribution. The loglikelihood adjustment is based on generalized extreme value (GEV) models which fitted by `oogev.fit`. The model is parameterized so that the marginal distribution at Oxford is GEV($\mu_0 + \mu_1, \sigma_0 + \sigma_1, \xi_0 + \xi_1$) and at Worthing is GEV($\mu_0 - \mu_1, \sigma_0 - \sigma_1, \xi_0 - \xi_1$), where GEV($\mu, \sigma, \xi$) denotes a GEV distribution with location $\mu$, scale $\sigma$ and shape $\xi$.
+
+We consider the example shown in Section 5.2 of @CB2007. The `owtemps` data (which can be found in *chandwich* package) contains annual maximum temperatures in Oxford and Worthing in the U.K. from 1901 to 1980. Year is considered as cluster, therefore there are 80 clusters of independent observations from a bivariate distribution. 
+
+
+### Model fitting developed from *ismev*
+
+The loglikelihood adjustment is based on generalized extreme value (GEV) models which fitted by `oogev.fit`. This model is a slightly modified version of `gev.fit` from *ismev*. The model is parameterized so that the marginal distribution at Oxford is GEV($\mu_0 + \mu_1, \sigma_0 + \sigma_1, \xi_0 + \xi_1$) and at Worthing is GEV($\mu_0 - \mu_1, \sigma_0 - \sigma_1, \xi_0 - \xi_1$), where GEV($\mu, \sigma, \xi$) denotes a GEV distribution with location $\mu$, scale $\sigma$ and shape $\xi$.
 
 We perform loglikelihood adjustment for the full six-parameter model and reproduce the relevant rows of Table 2 in @CB2007.
 
@@ -46,6 +52,22 @@ adj_owfit <- alogLik(owfit, cluster = year, cadjust = FALSE)
 # Provides MLE, standard error of MLE, and adjusted standard error of MLE.
 summary(adj_owfit)
 ```
+
+
+### Model fitting developed from *evd*
+
+This time, the loglikelihood adjustment is based on generalized extreme value (GEV) models which fitted by `fgev`, which is originally from *evd*. The model is parameterized so that the marginal distribution at Oxford is GEV($\mu_0 + \mu_1, \sigma_0, \xi_0) and at Worthing is GEV($\mu_0 - \mu_1, \sigma_0, \xi_0), where GEV($\mu, \sigma, \xi$) denotes a GEV distribution with location $\mu$, scale $\sigma$ and shape $\xi$.
+
+
+```{r}
+y <- c(chandwich::owtemps[, "Oxford"], chandwich::owtemps[, "Worthing"])
+x <- rep(c(-1, 1), each = length(y) / 2)
+owfit <- evd::fgev(y, nsloc = x)
+year <- rep(1:(length(y) / 2), 2)
+adj_owfit <- alogLik(owfit, cluster = year)
+summary(adj_owfit)
+```
+
 
 
 
