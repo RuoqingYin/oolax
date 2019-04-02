@@ -1,8 +1,10 @@
 ---
-title: "Introducing Objected-orientated Loglikelihood Adjustment for Extreme Value Models"
+title: "Introducing Object-orientated Loglikelihood Adjustment for Extreme Value Models"
 author: "Paul Northrop, Camellia Yin"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::pdf_document:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{Introducing Object-orientated Loglikelihood Adjustment for Extreme Value Models}
   %\VignetteEngine{knitr::rmarkdown}
@@ -13,6 +15,7 @@ link-citations: yes
 ---
 
 ```{r setup, include = FALSE}
+options(tinytex.verbose = TRUE)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -24,8 +27,12 @@ The *oolax* package performs loglikelihood adjustments of extreme value models w
 
 ## Loglikelihood adjustment using the alogLik function
 
-The function `alogLik` returns an object of class `oolax`, `chandwich`: a function that can be used to adjust the standard error of the estimated parameters in extreme value models given clustered data. This function is designed for fitted object from `evd` and `ismev` package. The default is `cluster=NULL` which is explained in `chandwich::adjust_loglik`.
-We illustrate the loglikelihood adjustments and the use of the function in *oolax* using some examples, starting from a gev fitted for clustered data.
+
+The `alogLik` function returns an object of class `"oolax"`, `"chandwich"`. It can be used to adjust the standard error of the estimated parameters in extreme value models given clustered data. This function is particular designed for fitted object from `evd` and `ismev` package. 
+
+It is an S3 method which uses `coef`, `vcov`, and `nobs` method for the fitted extreme value objects which have class `gev` or `pot` if they are from *evd* package, or class `ismev_gev` or `ismev_gpd` if they are from *ismev* package. If some of the above methods are not available, it will be created in oolax. Some work in other functions in the package is to link the methods to classes, and make sure in `alogLik` function, it would check if the object is from the correct class, and suitable methods can be applied to that class, then use the correct information to do the adjustment based on `chandwich::adjust_loglik`. Since we use `chandwich::adjust_loglik` to perform the loglikelihood adjustment, we created a function called `logLikVec` which provides a vector of the contributions to the independence loglikelihood from individual observations for GEV or GP distribution. The default is `cluster=NULL` then each observation is assumed to be in its own cluster.
+
+We illustrate the loglikelihood adjustments and the use of the function in *oolax* using one example, starting from a GEV model for annual maximum temperatures from two geographical locations. The clustering arises because a given pair of observations from these two locations occur in the same year. Therefore, year of observation is the cluster variable.
 
 
 ## Extreme value modelling of maximum temperatures
@@ -36,7 +43,9 @@ We consider the example shown in Section 5.2 of @CB2007. The `owtemps` data (whi
 
 ### Model fitting developed from *ismev*
 
-The loglikelihood adjustment is based on generalized extreme value (GEV) models which fitted by `oogev.fit`. This model is a slightly modified version of `gev.fit` from *ismev*. The model is parameterized so that the marginal distribution at Oxford is GEV($\mu_0 + \mu_1, \sigma_0 + \sigma_1, \xi_0 + \xi_1$) and at Worthing is GEV($\mu_0 - \mu_1, \sigma_0 - \sigma_1, \xi_0 - \xi_1$), where GEV($\mu, \sigma, \xi$) denotes a GEV distribution with location $\mu$, scale $\sigma$ and shape $\xi$.
+The loglikelihood adjustment is based on generalized extreme value (GEV) models which fitted by `oogev.fit`. This function is a slightly modified version of `gev.fit` from *ismev*.For a non-stationary fitted, we need some additional information which has not created in the original `gev.fit` nor `gpd.fit` to perform loglikelihood adjustment, therefore we modified those and create `oogev.fit` and `oogpd.fit`. 
+
+The model is parameterized so that the marginal distribution at Oxford is GEV($\mu_0 + \mu_1, \sigma_0 + \sigma_1, \xi_0 + \xi_1$) and at Worthing is GEV($\mu_0 - \mu_1, \sigma_0 - \sigma_1, \xi_0 - \xi_1$), where GEV($\mu, \sigma, \xi$) denotes a GEV distribution with location $\mu$, scale $\sigma$ and shape $\xi$. 
 
 We perform loglikelihood adjustment for the full six-parameter model and reproduce the relevant rows of Table 2 in @CB2007.
 
@@ -53,6 +62,58 @@ adj_owfit <- alogLik(owfit, cluster = year, cadjust = FALSE)
 summary(adj_owfit)
 ```
 
+#### Confidence intervals
+
+We use `confint` to calculate confidence intervals for one or more model parameters based on an object returned from `alogLik`.
+
+```{r}
+library(chandwich)
+# 95% confidence intervals, vertically adjusted
+conf_intervals(adj_owfit)
+```
+
+#### Confidence regions
+
+We reproduce partial of Figure 4(b) of @CB2007, adding a 95\% confidence region for the vertical adjustment.
+
+```{r, fig.align='center', fig.width=7, fig.height=7}
+which_pars <- c("scale", "scale1")
+gev_none <- conf_region(adj_owfit, which_pars = which_pars, type = "none")
+gev_vertical <- conf_region(adj_owfit, which_pars = which_pars)
+plot(gev_none, gev_vertical, lwd = 2, xlim = c(3.0, 4.5), ylim = c(-0.1, 1.25))
+```
+
+The 95\% contours of the profile adjusted loglikelihoods are similar.
+
+
+#### Comparing nested models
+
+Suppose that we want to test the null hypothesis that both Oxford and Worthing share a common GEV scale parameter, that is, $scale1 = 0$. We call `alogLik` and use the argument `fixed_pars` to fix $scale1$ to zero and perform loglikelihood adjustment under the reduced model. Then `compare_models` is used to conduct an adjusted likelihood ratio test. If `approx = FALSE` (the default) then equation (17) in Section 3.3 of @CB2007 is used.  If `approx = TRUE` then the approximation detailed in equations (18)-(20) is used.
+
+```{r}
+adj_owfit1 <- alogLik(larger = adj_owfit, fixed_pars = " scale1")
+compare_models(adj_owfit, adj_owfit1)
+compare_models(adj_owfit, adj_owfit1, approx = TRUE)
+```
+
+Alternatively, we can call `compare_models` directly without first creating `adj_owfit1`, using the argument `fixed_pars` to fix ` scale1` to zero.
+
+```{r}
+compare_models(adj_owfit, fixed_pars = " scale1")
+```
+
+In this case whether or not we use the approximate approach has a non-negligible effect on the $p$-value but we would probably reject the null in either case.
+
+Since `alogLik` returns an object of class `"oolax"`, `"chandwich"`, and a S3 method `anova` can be used to compare nested models of class `"chandwich"`. We perform loglikelihood adjustment of the models in which Oxford and Worthing share common GEV scale and shape parameters (`adj_owfit2`) and share all GEV parameters (`adj_owfit3`).  Then we perform pairwise comparisons of neighbouring nest models using `anova()`.
+
+```{r}
+adj_owfit2 <- alogLik(larger = adj_owfit, fixed_pars = c("scale1", "shape1"))
+adj_owfit3 <- alogLik(larger = adj_owfit, fixed_pars = c("loc1", "scale1", "shape1"))
+anova(adj_owfit, adj_owfit1, adj_owfit2, adj_owfit3)
+anova(adj_owfit, adj_owfit1, adj_owfit2, adj_owfit3, approx = TRUE)
+```
+
+
 
 ### Model fitting developed from *evd*
 
@@ -67,6 +128,45 @@ year <- rep(1:(length(y) / 2), 2)
 adj_owfit <- alogLik(owfit, cluster = year)
 summary(adj_owfit)
 ```
+#### Confidence intervals
+
+We use `confint` to calculate confidence intervals for one or more model parameters based on an object returned from `alogLik`.
+
+```{r}
+library(chandwich)
+# 95% confidence intervals, vertically adjusted
+conf_intervals(adj_owfit)
+```
+#### Confidence regions
+
+Compute 95\% confidence region for the vertical adjustment.
+
+```{r, fig.align='center', fig.width=7, fig.height=7}
+which_pars <- c("loc", "loctrend")
+gev_none <- conf_region(adj_owfit, which_pars = which_pars, type = "none")
+gev_vertical <- conf_region(adj_owfit, which_pars = which_pars)
+plot(gev_none, gev_vertical, lwd = 2, xlim = c(3.0, 4.5), ylim = c(-0.1, 1.25))
+```
+
+The 95\% contours of the profile adjusted loglikelihoods are similar.
+
+#### Comparing nested models
+
+Suppose that we want to test the null hypothesis that both Oxford and Worthing share a common GEV location parameter, that is, $loctrend = 0$. We call `alogLik` and use the argument `fixed_pars` to fix $loctrend$ to zero and perform loglikelihood adjustment under the reduced model. Then `compare_models` is used to conduct an adjusted likelihood ratio test. If `approx = FALSE` (the default) then equation (17) in Section 3.3 of @CB2007 is used.  If `approx = TRUE` then the approximation detailed in equations (18)-(20) is used.
+
+```{r}
+adj_owfit1 <- alogLik(larger = adj_owfit, fixed_pars = "loctrend")
+compare_models(adj_owfit, adj_owfit1)
+compare_models(adj_owfit, adj_owfit1, approx = TRUE)
+```
+
+Alternatively, we can call `compare_models` directly without first creating `adj_owfit1`, using the argument `fixed_pars` to fix `loctrend` to zero.
+
+```{r}
+compare_models(adj_owfit, fixed_pars = "loctrend")
+```
+
+In this case whether or not we use the approximate approach has a non-negligible effect on the $p$-value but we would probably reject the null in either case.
 
 
 
