@@ -3,6 +3,7 @@
 S3method(alogLik,evd)
 S3method(alogLik,gev.fit)
 S3method(alogLik,gpd.fit)
+S3method(anova,oolax)
 S3method(coef,gev)
 S3method(coef,ismev_gev)
 S3method(coef,ismev_gpd)

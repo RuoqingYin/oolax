@@ -88,36 +88,20 @@ The 95\% contours of the profile adjusted loglikelihoods are similar.
 
 #### Comparing nested models
 
-Suppose that we want to test the null hypothesis that both Oxford and Worthing share a common GEV scale parameter, that is, $scale1 = 0$. We call `alogLik` and use the argument `fixed_pars` to fix $scale1$ to zero and perform loglikelihood adjustment under the reduced model. Then `compare_models` is used to conduct an adjusted likelihood ratio test. If `approx = FALSE` (the default) then equation (17) in Section 3.3 of @CB2007 is used.  If `approx = TRUE` then the approximation detailed in equations (18)-(20) is used.
+Suppose that we want to test the null hypothesis that both Oxford and Worthing share a common GEV shape parameter, that is, $shape1 = 0$. The nested model can be fitted by `oogev.fit`, and we perform loglikelihood adjustment under it. Then `anova` is used to conduct an adjusted likelihood ratio test. 
+
 
 ```{r}
-adj_owfit1 <- alogLik(larger = adj_owfit, fixed_pars = " scale1")
-compare_models(adj_owfit, adj_owfit1)
-compare_models(adj_owfit, adj_owfit1, approx = TRUE)
-```
-
-Alternatively, we can call `compare_models` directly without first creating `adj_owfit1`, using the argument `fixed_pars` to fix ` scale1` to zero.
-
-```{r}
-compare_models(adj_owfit, fixed_pars = " scale1")
-```
-
-In this case whether or not we use the approximate approach has a non-negligible effect on the $p$-value but we would probably reject the null in either case.
-
-Since `alogLik` returns an object of class `"oolax"`, `"chandwich"`, and a S3 method `anova` can be used to compare nested models of class `"chandwich"`. We perform loglikelihood adjustment of the models in which Oxford and Worthing share common GEV scale and shape parameters (`adj_owfit2`) and share all GEV parameters (`adj_owfit3`).  Then we perform pairwise comparisons of neighbouring nest models using `anova()`.
-
-```{r}
-adj_owfit2 <- alogLik(larger = adj_owfit, fixed_pars = c("scale1", "shape1"))
-adj_owfit3 <- alogLik(larger = adj_owfit, fixed_pars = c("loc1", "scale1", "shape1"))
-anova(adj_owfit, adj_owfit1, adj_owfit2, adj_owfit3)
-anova(adj_owfit, adj_owfit1, adj_owfit2, adj_owfit3, approx = TRUE)
+owfit_small <- oogev.fit(y, x, mul = 1, sigl = 1, method = "BFGS" )
+adj_owfit_small <- alogLik(owfit_small, cluster = year, cadjust = FALSE)
+anova(adj_owfit_small, adj_owfit)
 ```
 
 
 
 ### Model fitting developed from *evd*
 
-This time, the loglikelihood adjustment is based on generalized extreme value (GEV) models which fitted by `fgev`, which is originally from *evd*. The model is parameterized so that the marginal distribution at Oxford is GEV($\mu_0 + \mu_1, \sigma_0, \xi_0) and at Worthing is GEV($\mu_0 - \mu_1, \sigma_0, \xi_0), where GEV($\mu, \sigma, \xi$) denotes a GEV distribution with location $\mu$, scale $\sigma$ and shape $\xi$.
+This time, the loglikelihood adjustment is based on generalized extreme value (GEV) models which fitted by `fgev`, which is originally from *evd*. The model is parameterized so that the marginal distribution at Oxford is GEV($\mu_0 + \mu_1, \sigma_0, \xi_0$) and at Worthing is GEV($\mu_0 - \mu_1, \sigma_0, \xi_0$), where GEV($\mu, \sigma, \xi$) denotes a GEV distribution with location $\mu$, scale $\sigma$ and shape $\xi$.
 
 
 ```{r}
@@ -125,8 +109,8 @@ y <- c(chandwich::owtemps[, "Oxford"], chandwich::owtemps[, "Worthing"])
 x <- rep(c(-1, 1), each = length(y) / 2)
 owfit <- evd::fgev(y, nsloc = x)
 year <- rep(1:(length(y) / 2), 2)
-adj_owfit <- alogLik(owfit, cluster = year)
-summary(adj_owfit)
+oola_small <- alogLik(owfit, cluster = year)
+summary(oola_small)
 ```
 #### Confidence intervals
 
@@ -135,7 +119,7 @@ We use `confint` to calculate confidence intervals for one or more model paramet
 ```{r}
 library(chandwich)
 # 95% confidence intervals, vertically adjusted
-conf_intervals(adj_owfit)
+conf_intervals(oola_small)
 ```
 #### Confidence regions
 
@@ -143,8 +127,8 @@ Compute 95\% confidence region for the vertical adjustment.
 
 ```{r, fig.align='center', fig.width=7, fig.height=7}
 which_pars <- c("loc", "loctrend")
-gev_none <- conf_region(adj_owfit, which_pars = which_pars, type = "none")
-gev_vertical <- conf_region(adj_owfit, which_pars = which_pars)
+gev_none <- conf_region(oola_small, which_pars = which_pars, type = "none")
+gev_vertical <- conf_region(oola_small, which_pars = which_pars)
 plot(gev_none, gev_vertical, lwd = 2, xlim = c(3.0, 4.5), ylim = c(-0.1, 1.25))
 ```
 
@@ -152,22 +136,15 @@ The 95\% contours of the profile adjusted loglikelihoods are similar.
 
 #### Comparing nested models
 
-Suppose that we want to test the null hypothesis that both Oxford and Worthing share a common GEV location parameter, that is, $loctrend = 0$. We call `alogLik` and use the argument `fixed_pars` to fix $loctrend$ to zero and perform loglikelihood adjustment under the reduced model. Then `compare_models` is used to conduct an adjusted likelihood ratio test. If `approx = FALSE` (the default) then equation (17) in Section 3.3 of @CB2007 is used.  If `approx = TRUE` then the approximation detailed in equations (18)-(20) is used.
+Suppose that we want to test the null hypothesis that both Oxford and Worthing share a common GEV location parameter, that is, $loctrend = 0$. The nested model can be fitted by `fgev`, and we perform loglikelihood adjustment under it. Then `anova` is used to conduct an adjusted likelihood ratio test. 
+
 
 ```{r}
-adj_owfit1 <- alogLik(larger = adj_owfit, fixed_pars = "loctrend")
-compare_models(adj_owfit, adj_owfit1)
-compare_models(adj_owfit, adj_owfit1, approx = TRUE)
+owfit <- evd::fgev(y)
+year <- rep(1:(length(y) / 2), 2)
+oola_tiny <- alogLik(owfit, cluster = year)
+anova(oola_small, oola_tiny)
 ```
-
-Alternatively, we can call `compare_models` directly without first creating `adj_owfit1`, using the argument `fixed_pars` to fix `loctrend` to zero.
-
-```{r}
-compare_models(adj_owfit, fixed_pars = "loctrend")
-```
-
-In this case whether or not we use the approximate approach has a non-negligible effect on the $p$-value but we would probably reject the null in either case.
-
 
 
 
