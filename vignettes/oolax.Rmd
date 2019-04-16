@@ -5,12 +5,19 @@ date: "`r Sys.Date()`"
 output:
   rmarkdown::pdf_document:
     toc: true
+    toc_depth: 4
+header-includes:
+   - \usepackage{setspace}
+   - \onehalfspacing
+fontsize: 11pt
 vignette: >
   %\VignetteIndexEntry{Introducing Object-orientated Loglikelihood Adjustment for Extreme Value Models}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: oolax.bib
 link-citations: yes
+
+
 
 ---
 
@@ -74,7 +81,7 @@ conf_intervals(adj_owfit)
 
 #### Confidence regions
 
-We reproduce partial of Figure 4(b) of @CB2007, adding a 95\% confidence region for the vertical adjustment.
+We compute the confidence region for a set of parameter ($\sigma, \sigma_1$), and reproduce partial of Figure 4(b) of @CB2007, adding a 95\% confidence region for the vertical adjustment.
 
 ```{r, fig.align='center', fig.width=7, fig.height=7}
 which_pars <- c("scale", "scale1")
@@ -123,13 +130,13 @@ conf_intervals(oola_small)
 ```
 #### Confidence regions
 
-Compute 95\% confidence region for the vertical adjustment.
+We compute the confidence region for a set of parameter ($\mu_0, \mu_1$), and adding 95\% confidence region for the vertical adjustment.
 
 ```{r, fig.align='center', fig.width=7, fig.height=7}
 which_pars <- c("loc", "loctrend")
 gev_none <- conf_region(oola_small, which_pars = which_pars, type = "none")
 gev_vertical <- conf_region(oola_small, which_pars = which_pars)
-plot(gev_none, gev_vertical, lwd = 2, xlim = c(3.0, 4.5), ylim = c(-0.1, 1.25))
+plot(gev_none, gev_vertical, xlim = c(80, 82.3), ylim = c(-3.5, -1.5))
 ```
 
 The 95\% contours of the profile adjusted loglikelihoods are similar.
